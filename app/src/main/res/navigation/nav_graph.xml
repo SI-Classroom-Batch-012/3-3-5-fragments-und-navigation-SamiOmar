@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/notizListeFragment">
+
+    <fragment
+        android:id="@+id/notizListeFragment"
+        android:name="com.example.fragment_freitag_aufagbe.NotizListeFragment"
+        android:label="fragment_notiz_liste"
+        tools:layout="@layout/fragment_notiz_liste" >
+        <action
+            android:id="@+id/action_notizListeFragment_to_notizDetailFragment"
+            app:destination="@id/notizDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notizDetailFragment"
+        android:name="com.example.fragment_freitag_aufagbe.NotizDetailFragment"
+        android:label="fragment_notiz_detail"
+        tools:layout="@layout/fragment_notiz_detail" >
+        <action
+            android:id="@+id/action_notizDetailFragment_to_notizBearbeitenFragment"
+            app:destination="@id/notizBearbeitenFragment" />
+        <action
+            android:id="@+id/action_notizDetailFragment_to_notizListeFragment"
+            app:destination="@id/notizListeFragment" />
+        <argument
+            android:name="notiz_argument"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/notizBearbeitenFragment"
+        android:name="com.example.fragment_freitag_aufagbe.NotizBearbeitenFragment"
+        android:label="fragment_notiz_bearbeiten"
+        tools:layout="@layout/fragment_notiz_bearbeiten" >
+        <action
+            android:id="@+id/action_notizBearbeitenFragment_to_notizDetailFragment"
+            app:destination="@id/notizDetailFragment" />
+    </fragment>
+</navigation>
