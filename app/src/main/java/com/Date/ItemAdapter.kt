@@ -1,6 +1,7 @@
 package com.Date
 
 import android.service.autofill.Dataset
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -9,13 +10,14 @@ import com.example.fragment_freitag_aufagbe.NotizListeFragmentDirections
 import com.example.fragment_freitag_aufagbe.databinding.ListItemBinding
 
  class ItemAdapter (
-     private var dataset: List<Notiz>
-): RecyclerView.Adapter<ItemAdapter.NotizViewHolder>() {
+     private var dataset: List<Notiz>,
+     private val onItemLongClick: (Notiz, Int) -> Unit // Hinzugefügt
+
+ ): RecyclerView.Adapter<ItemAdapter.NotizViewHolder>() {
      inner class NotizViewHolder(val binding: ListItemBinding) :
          RecyclerView.ViewHolder(binding.root)
 
-     fun newData(data: List<Notiz>)
-     {
+     fun newData(data: List<Notiz>) {
          dataset = data
          notifyDataSetChanged()
      }
@@ -36,16 +38,22 @@ import com.example.fragment_freitag_aufagbe.databinding.ListItemBinding
          val notiz = dataset[position]
 
          holder.binding.nameTV.text = notiz.titel
+         holder.binding.titelsTV.text = notiz.detail
 
-
+         // Klick-Listener für die Ansicht
          holder.binding.notizCV.setOnClickListener {
+             Log.d("CardViewTest", "CardView clicked at position $position")
              val navcontroller = holder.binding.root.findNavController()
              navcontroller.navigate(
-                 NotizListeFragmentDirections.actionNotizListeFragmentToNotizDetailFragment(
-                     position
-                 )
+                 NotizListeFragmentDirections.actionNotizListeFragmentToNotizDetailFragment(position)
              )
          }
 
+
+         // Lang-Klick-Listener für die gesamte Zeile
+         holder.itemView.setOnLongClickListener {
+             onItemLongClick(notiz, position)
+             true // Gibt an, dass der Klick verarbeitet wurde
+         }
      }
  }

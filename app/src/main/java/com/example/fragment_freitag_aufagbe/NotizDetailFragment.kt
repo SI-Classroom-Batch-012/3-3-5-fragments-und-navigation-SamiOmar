@@ -38,6 +38,7 @@ class NotizDetailFragment : Fragment() {
 
         // Details in Views setzen
         binding.notizEV.text = Editable.Factory.getInstance().newEditable(notiz.titel)
+        binding.titleEV.text = Editable.Factory.getInstance().newEditable(notiz.titel)
 
         // Initialer Zustand des Buttons
         updateButtonState()
@@ -53,6 +54,7 @@ class NotizDetailFragment : Fragment() {
 
         // TextWatcher zu EditText hinzufügen
         binding.notizEV.addTextChangedListener(textWatcher)
+        binding.titleEV.addTextChangedListener(textWatcher)
 
         // Button-Klick-Listener
         binding.button.setOnClickListener {
@@ -68,24 +70,14 @@ class NotizDetailFragment : Fragment() {
     }
 
     private fun updateButtonState() {
-        if (binding.notizEV.text.isNotEmpty()) {
-            // Text ist vorhanden - Button aktivieren
+        if (binding.notizEV.text.isNotEmpty() || binding.titleEV.text.isNotEmpty()) {
             binding.button.isEnabled = true
-            binding.button.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.button_activ
-                )
-            ) // Farbe für aktiven Zustand
+            binding.button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_activ))
+            binding.button.text = "Speichern" // Text ändern
         } else {
-            // Kein Text - Button deaktivieren
             binding.button.isEnabled = false
-            binding.button.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.button_inactiv
-                )
-            ) // Farbe für inaktiven Zustand
+            binding.button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.button_inactiv))
+            binding.button.text = "Abbrechen" // Text ändern
         }
     }
 
@@ -96,6 +88,7 @@ class NotizDetailFragment : Fragment() {
 
     private fun saveNotizChanges(position: Int, notiz: Notiz) {
         notiz.titel = binding.notizEV.text.toString()
+        notiz.detail =  binding.titleEV.text.toString()
 
         // Aktualisieren Sie das Element an der entsprechenden Position
         val mainActivity = activity as MainActivity
