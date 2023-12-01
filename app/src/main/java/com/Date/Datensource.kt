@@ -6,9 +6,9 @@ class Datensource {
 
         val result = mutableListOf<Notiz>()
 
-        for (i in 1..10){
-            val newTeam = Notiz("Team $i", 0)
-            result.add(newTeam)
+        for (i in 0..1){
+            val newNotiz = Notiz("")
+            result.add(newNotiz)
         }
 
         return result
