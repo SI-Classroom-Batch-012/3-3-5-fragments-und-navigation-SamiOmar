@@ -37,8 +37,13 @@ import com.example.fragment_freitag_aufagbe.databinding.ListItemBinding
      override fun onBindViewHolder(holder: NotizViewHolder, position: Int) {
          val notiz = dataset[position]
 
+         // Limitieren Sie den Titel auf die ersten drei Wörter
+         val words = notiz.titel.split(" ")
+         val limitedTitle = if (words.size > 3) words.take(3).joinToString(" ") + "..." else notiz.titel
+
          holder.binding.nameTV.text = notiz.titel
          holder.binding.titelsTV.text = notiz.detail
+         holder.binding.datumTV.text = notiz.erstelltAm  // TextView für das Datum und die Uhrzeit
 
          // Klick-Listener für die Ansicht
          holder.binding.notizCV.setOnClickListener {

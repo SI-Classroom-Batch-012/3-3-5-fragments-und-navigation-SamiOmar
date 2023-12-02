@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.Date.ItemAdapter
 import com.Date.Notiz
 import com.example.fragment_freitag_aufagbe.databinding.FragmentNotizListeBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class NotizListeFragment : Fragment() {
     private lateinit var binding: FragmentNotizListeBinding
@@ -90,8 +94,9 @@ class NotizListeFragment : Fragment() {
         dialogBuilder.setPositiveButton("Hinzufügen") { _, _ ->
             val notiz = notizET.text.toString()
             val detalis = notizDetails.text.toString()
-            val myNotiz = Notiz(notiz, detalis)
-            mainActivity.addNotiz(myNotiz)
+            val aktuellesDatum = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date())
+            val myNotiz = Notiz(notiz, detalis, aktuellesDatum)
+            mainActivity.addNotiz(myNotiz)  // Hier fügen Sie die Notiz zur Liste hinzu
             adapter.newData(mainActivity.dataset)
             binding.notizRV.scrollToPosition(0)
         }

@@ -39,6 +39,8 @@ class NotizDetailFragment : Fragment() {
         // Details in Views setzen
         binding.notizEV.text = Editable.Factory.getInstance().newEditable(notiz.titel)
         binding.titleEV.text = Editable.Factory.getInstance().newEditable(notiz.titel)
+        binding.datumTV.text = notiz.erstelltAm // Hier setzen Sie das Datum
+
 
         // Initialer Zustand des Buttons
         updateButtonState()
