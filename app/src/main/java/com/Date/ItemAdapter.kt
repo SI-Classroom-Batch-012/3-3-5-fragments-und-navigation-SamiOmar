@@ -17,6 +17,8 @@ import com.example.fragment_freitag_aufagbe.databinding.ListItemBinding
      inner class NotizViewHolder(val binding: ListItemBinding) :
          RecyclerView.ViewHolder(binding.root)
 
+
+
      fun newData(data: List<Notiz>) {
          dataset = data
          notifyDataSetChanged()

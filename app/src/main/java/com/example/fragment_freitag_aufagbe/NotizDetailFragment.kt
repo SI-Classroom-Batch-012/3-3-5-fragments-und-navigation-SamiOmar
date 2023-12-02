@@ -38,9 +38,6 @@ class NotizDetailFragment : Fragment() {
 
         // Details in Views setzen
         binding.notizEV.text = Editable.Factory.getInstance().newEditable(notiz.titel)
-        binding.titleEV.text = Editable.Factory.getInstance().newEditable(notiz.titel)
-        binding.datumTV.text = notiz.erstelltAm // Hier setzen Sie das Datum
-
 
         // Initialer Zustand des Buttons
         updateButtonState()
@@ -90,7 +87,7 @@ class NotizDetailFragment : Fragment() {
 
     private fun saveNotizChanges(position: Int, notiz: Notiz) {
         notiz.titel = binding.notizEV.text.toString()
-        notiz.detail =  binding.titleEV.text.toString()
+        notiz.titel =  binding.titleEV.text.toString()
 
         // Aktualisieren Sie das Element an der entsprechenden Position
         val mainActivity = activity as MainActivity
